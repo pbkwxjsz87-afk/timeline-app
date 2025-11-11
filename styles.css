@@ -1,0 +1,96 @@
+:root{
+  --bg: #0b1020;
+  --panel: #121733;
+  --ink: #e9ecf6;
+  --muted: #a8b0d6;
+  --accent: #6ea8fe;
+  --line: #263058;
+  --good: #53d769;
+  --warn: #ffcc00;
+  --bad: #ff3b30;
+  --chip: #212a52;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#f6f7fb; --panel:#ffffff; --ink:#0b1020; --muted:#5d6280;
+    --accent:#2f6df6; --line:#dfe4f2; --chip:#eef2ff;
+  }
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font:16px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+header{
+  position:sticky; top:0; z-index:10; backdrop-filter:saturate(1.3) blur(8px);
+  background:color-mix(in oklab, var(--bg) 70%, transparent); border-bottom:1px solid var(--line);
+}
+.wrap{max-width:1100px; margin:0 auto; padding:16px}
+h1{margin:0; font-size:20px}
+.grid{
+  display:grid; grid-template-columns: 360px 1fr; gap:16px; align-items:start;
+}
+@media (max-width: 900px){ .grid{grid-template-columns:1fr} }
+.card{
+  background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:14px;
+  box-shadow:0 1px 0 rgba(0,0,0,.04), 0 10px 30px rgba(0,0,0,.08);
+}
+.row{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+label{font-size:12px; color:var(--muted); display:block; margin-bottom:6px}
+input[type="text"], input[type="date"], select, textarea{
+  width:100%; padding:10px 12px; border:1px solid var(--line); background:transparent; color:var(--ink);
+  border-radius:10px; outline:none;
+}
+textarea{min-height:72px; resize:vertical}
+button{
+  padding:10px 14px; border-radius:10px; border:1px solid var(--line); background:var(--chip); color:var(--ink); cursor:pointer;
+}
+button.primary{ background:var(--accent); color:#fff; border-color:color-mix(in oklab, var(--accent) 80%, #000 20%) }
+button.ghost{ background:transparent }
+button:disabled{opacity:.5; cursor:not-allowed}
+.pill{padding:6px 10px; border-radius:999px; background:var(--chip); border:1px solid var(--line); font-size:12px}
+.toolbar{display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:space-between}
+.toolbar .left, .toolbar .right {display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+input[type="range"]{width:200px}
+.timeline{
+  position:relative; padding:24px 0; margin:0 0 24px;
+}
+.axis{
+  position:absolute; left:28px; top:0; bottom:0; width:2px;
+  background:linear-gradient(180deg, transparent 0, var(--line) 16px, var(--line) calc(100% - 16px), transparent 100%);
+}
+.now-marker{
+  position:absolute; left:12px; width:32px; height:32px; border-radius:16px; display:flex;
+  align-items:center; justify-content:center; background:var(--accent); color:#fff; font-size:12px; translate:0 -50%;
+  box-shadow:0 4px 16px rgba(0,0,0,.25);
+}
+.year-tick{
+  position:absolute; left:14px; width:28px; height:1px; background:var(--line);
+}
+.year-label{
+  position:absolute; left:52px; font-size:12px; color:var(--muted); transform:translateY(-50%);
+}
+.event{
+  position:absolute; left:52px; translate: 0 -50%; max-width: 680px;
+}
+.dot{
+  position:absolute; left:-28px; top:50%; translate: -50% -50%; width:14px; height:14px; border-radius:7px; outline:3px solid var(--panel);
+  border:2px solid var(--line); background:var(--chip);
+}
+.card.event-card{
+  padding:10px 12px; border-radius:12px; border-left: 4px solid var(--accent);
+  background:color-mix(in oklab, var(--panel) 90%, var(--chip) 10%);
+}
+.event-title{font-weight:600}
+.event-date{font-size:12px; color:var(--muted)}
+.event-notes{margin-top:6px; font-size:14px; color:var(--ink)}
+.chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:6px}
+.chip{font-size:11px; padding:5px 8px; border-radius:999px; background:var(--chip); border:1px solid var(--line)}
+.figure{margin-top:8px; border-radius:10px; border:1px solid var(--line); overflow:hidden; max-height:200px}
+.figure img{display:block; width:100%; object-fit:cover; max-height:200px}
+.empty{color:var(--muted); padding:12px 14px}
+.kvs{display:flex; gap:8px; flex-wrap:wrap}
+.kvs .pill{cursor:pointer}
+.help{font-size:12px; color:var(--muted)}
+.danger{color:var(--bad)}
+.success{color:var(--good)}

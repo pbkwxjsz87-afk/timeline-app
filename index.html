@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Life Timeline • Vertical</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header>
+    <div class="wrap toolbar">
+      <div class="left">
+        <h1>Life Timeline</h1>
+        <span class="pill" id="stats"></span>
+        <span class="pill" id="span"></span>
+        <span class="pill" id="remoteStatus"></span>
+      </div>
+      <div class="right">
+        <input id="search" type="text" placeholder="Search title, notes, category…" />
+        <label class="pill">Zoom
+          <input id="zoom" type="range" min="10" max="200" value="60" />
+        </label>
+        <button id="sync" class="ghost">Sync Sheet</button>
+        <button id="export" class="ghost">Export JSON</button>
+        <label class="pill" for="importFile">Import JSON</label>
+        <input id="importFile" type="file" accept="application/json" style="display:none" />
+        <button id="reset" class="ghost danger">Reset Data</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap grid">
+    <section class="card">
+      <h2 style="margin-top:4px">Add / Edit Event</h2>
+      <div class="row">
+        <div style="flex:1">
+          <label for="date">Date</label>
+          <input id="date" type="date" />
+        </div>
+        <div style="flex:2">
+          <label for="title">Title</label>
+          <input id="title" type="text" placeholder="e.g., First Job" />
+        </div>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <div style="flex:1">
+          <label for="category">Category</label>
+          <input id="category" type="text" list="categoryList" placeholder="Life / Education / Work…" />
+          <datalist id="categoryList"></datalist>
+        </div>
+        <div style="flex:2">
+          <label for="image">Image URL (optional)</label>
+          <input id="image" type="text" placeholder="https://…" />
+        </div>
+      </div>
+      <div style="margin-top:10px">
+        <label for="notes">Notes</label>
+        <textarea id="notes" placeholder="Short details…"></textarea>
+      </div>
+      <div class="row" style="margin-top:12px">
+        <button id="save" class="primary">Save Event</button>
+        <button id="clear" class="ghost">Clear Form</button>
+        <button id="delete" class="ghost danger" disabled>Delete</button>
+        <span id="status" class="help"></span>
+      </div>
+      <hr style="margin:16px -14px 12px; border:none; border-top:1px solid var(--line)">
+      <h3 style="margin:0 0 6px">Categories</h3>
+      <div id="categoryChips" class="kvs"></div>
+      <div class="help" style="margin-top:6px">
+        Click a category chip to filter. Click again to clear.
+      </div>
+    </section>
+
+    <section class="card" id="timelineCard" style="position:relative; min-height:70vh; overflow:auto;">
+      <div id="timeline" class="timeline">
+        <div class="axis"></div>
+        <div id="ticks"></div>
+        <div id="events"></div>
+      </div>
+      <div id="empty" class="empty">No events yet — add your <strong>Date of Birth</strong> first for best scaling.</div>
+    </section>
+  </main>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
