@@ -5,23 +5,23 @@ Interactive vertical timeline that can run on GitHub Pages and syncs events to a
 ## Quick start
 
 1. Clone the repo and move into it.
-2. Optional: copy `config.sample.js` to `config.js` and fill in your Apps Script URL/API key. The existing `config.js` ships with blank values which keeps the app in offline mode.
-3. Serve the folder with any static server (required for the `import` used by `app.js`). For example:
+2. Optional: copy `docs/config.sample.js` to `docs/config.js` and fill in your Apps Script URL/API key. The existing `docs/config.js` ships with blank values which keeps the app in offline mode.
+3. Serve the `docs/` folder with any static server (required for the `import` used by `app.js`). For example:
    ```bash
-   python3 -m http.server 4173
+   python3 -m http.server 4173 --directory docs
    ```
 4. Visit `http://localhost:4173`.
 
 ## Deploying on GitHub Pages
 
 1. Commit everything to `main` (or any branch).
-2. In **Settings → Pages**, choose *Deploy from a branch*, pick `main` and the `/ (root)` folder. GitHub will publish the static site automatically.
+2. In **Settings → Pages**, choose *Deploy from a branch*, pick `main` and the `/docs` folder. GitHub will publish the static site automatically (a `.nojekyll` file is already provided).
 3. Whenever you push to that branch, Pages updates and the app is ready under `https://<username>.github.io/<repo>/`.
 
 ## Connecting Google Sheets
 
 ### 1. Prepare the sheet
-- Create a Google Sheet and name a tab `Events` (or any name that you later reference in `config.js`).
+- Create a Google Sheet and name a tab `Events` (or any name that you later reference in `docs/config.js`).
 - Add a header row with the following columns: `id`, `dateISO`, `title`, `category`, `notes`, `image`.
 
 ### 2. Create an Apps Script web app
@@ -116,7 +116,7 @@ function respond(body, status = 200) {
 ```
 
 ### 3. Point the app to the web app
-Edit `config.js`:
+Edit `docs/config.js`:
 ```js
 export const CONFIG = {
   appsScriptUrl: 'https://script.google.com/macros/s/<deployment-id>/exec',
@@ -135,12 +135,14 @@ Commit or keep this file locally depending on whether you want the values in sou
 
 ## Project structure
 ```
-index.html       # Static markup
-styles.css       # Theme and layout
-app.js           # UI logic + Sheets API integration
-config.js        # Runtime configuration (safe defaults provided)
-config.sample.js # Copy helper for new environments
-README.md        # Docs & setup steps
+docs/
+├── index.html
+├── styles.css
+├── app.js
+├── config.js        # Runtime configuration (safe defaults provided)
+├── config.sample.js # Copy helper for new environments
+└── .nojekyll        # Keeps Pages from running Jekyll
+README.md            # Docs & setup steps
 ```
 
 ## Development tips
